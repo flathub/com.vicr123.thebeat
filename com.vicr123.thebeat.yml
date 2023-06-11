@@ -7,6 +7,7 @@ finish-args:
   - --socket=wayland
   - --socket=fallback-x11
   - --socket=pulseaudio
+  - --share=ipc
   - --share=network
   - --own-name=org.mpris.MediaPlayer2.theBeat
   - --filesystem=home
