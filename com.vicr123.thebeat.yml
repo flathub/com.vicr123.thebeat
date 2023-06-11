@@ -23,7 +23,6 @@ cleanup:
   - '/bin/mmc-tool'
   - '/bin/taglib-config'
   - '/bin/tltrdesktop'
-  - '/lib/debug'
   - '/lib/pkgconfig'
 modules:
   - name: taglib
