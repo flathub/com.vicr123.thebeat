@@ -94,7 +94,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/vicr123/thebeat
-        tag: v4.0
-        commit: "4802a524493dc53983efee1d839f2ad630d2125d"
+        # tag: v4.0.1
+        commit: "23ffc3bf78282ca071a9a2f2975b432f145b2524"
     config-opts:
       - -DFORCE_STABLE=ON
