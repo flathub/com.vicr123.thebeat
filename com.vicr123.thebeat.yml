@@ -1,6 +1,6 @@
 app-id: com.vicr123.thebeat
 runtime: org.kde.Platform
-runtime-version: '5.15-21.08'
+runtime-version: '6.5'
 sdk: org.kde.Sdk
 command: thebeat
 finish-args:
@@ -11,6 +11,7 @@ finish-args:
   - --own-name=org.mpris.MediaPlayer2.theBeat
   - --filesystem=home
   - --filesystem=/run/media
+  - --system-talk-name=org.freedesktop.UDisks2
 cleanup:
   - '/include'
   - '/qt'
@@ -25,7 +26,7 @@ cleanup:
   - '/lib/pkgconfig'
 modules:
   - name: taglib
-    buildsystem: cmake-ninja
+    buildsystem: cmake
     config-opts:
       - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
     sources:
@@ -44,27 +45,29 @@ modules:
       - type: archive
         url: https://github.com/rocky/libcdio-paranoia/archive/release-10.2+2.0.1.tar.gz
         sha256: 7a4e257c85f3f84129cca55cd097c397364c7a6f79b9701bbc593b13bd59eb95
-  - name: the-libs
-    buildsystem: qmake
+  - name: qcoro
+    buildsystem: cmake-ninja
     sources:
       - type: git
-        url: "https://github.com/vicr123/the-libs.git"
-        tag: "v5.1"
-        commit: "d185cc188bd105e1436605fa2f9f0d5c74591fbe"
-  - name: contemporary
-    buildsystem: qmake
+        url: https://github.com/danvratil/qcoro
+        tag: v0.9.0
+        commit: "e66e8882acdea951cd379045167fc9be30564942"
     config-opts:
-      - THELIBS_BUILDTOOLS_PATH = /app/share/the-libs/pri
-      - THELIBS_INSTALL_QT_PLUGINS = /app/lib/qt/plugins
-      - '-after'
-      - QT -= thelib
-      - QT += dbus
-      - LIBS += -L/app/lib -lthe-libs
-      - INCLUDEPATH += /app/include/the-libs
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+  - name: libcontemporary
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/vicr123/libcontemporary
+        tag: v6.0
+        commit: "d7d6a26b0f1d0620e7d73fd710046b948aa91a86"
+  - name: contemporary
+    buildsystem: cmake-ninja
     sources:
       - type: git
         url: https://github.com/vicr123/contemporary-theme
-        commit: "5ef6c2811a924782e06f107d75e1d3e7ab9ceeb8"
+        tag: v2.0
+        commit: "d4a9d63966d5800c47ad3a985bc8480ee29ed36e"
   - name: contemporary-icons
     buildsystem: simple
     build-commands:
@@ -72,22 +75,26 @@ modules:
       - cp -r * /app/share/icons/contemporary/
     sources:
       - type: git
-        url: "https://github.com/vicr123/contemporary-icons.git"
-        tag: "v1.10"
-        commit: "97be306b78006d248f692a480ae5eaa48eead607"
-  - name: thebeat
-    buildsystem: qmake
+        url: https://github.com/vicr123/contemporary-icons
+        tag: v1.11
+        commit: "6f5ffadb8616d9e80e6478129f7499c41974d209"
+  - name: thefrisbee
+    buildsystem: cmake-ninja
     builddir: true
-    config-opts:
-      - THELIBS_BUILDTOOLS_PATH = /app/share/the-libs/pri
-      - THELIBS_INSTALL_SETTINGS = /app/etc
-      - '-after'
-      - QT -= thelib
-      - QT += dbus
-      - LIBS += -L/app/lib -lthe-libs
-      - INCLUDEPATH += /app/include/the-libs
     sources:
       - type: git
-        url: "https://github.com/vicr123/theBeat.git"
-        commit: "7de8025619be29e680120fe0a890231b189aacd6"
-        
+        url: https://github.com/vicr123/thefrisbee
+        tag: v2.0
+        commit: "2829c50b7d16604533e77f214be5464cdc51092d"
+    config-opts:
+      - -DFORCE_STABLE=ON
+  - name: thebeat
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/vicr123/thebeat
+        tag: v4.0
+        commit: "4802a524493dc53983efee1d839f2ad630d2125d"
+    config-opts:
+      - -DFORCE_STABLE=ON
