@@ -26,7 +26,7 @@ cleanup:
   - '/lib/pkgconfig'
 modules:
   - name: taglib
-    buildsystem: cmake
+    buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
     sources:
