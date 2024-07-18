@@ -1,6 +1,6 @@
 app-id: com.vicr123.thebeat
 runtime: org.kde.Platform
-runtime-version: '6.5'
+runtime-version: '6.7'
 sdk: org.kde.Sdk
 command: thebeat
 finish-args:
@@ -31,7 +31,7 @@ modules:
       - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
     sources:
       - type: archive
-        url: https://github.com/taglib/taglib/releases/download/v1.12/taglib-1.12.tar.gz
+        url: https://github.com/taglib/taglib/releases/download/v2.0.1/taglib-2.0.1.tar.gz
         sha256: 7fccd07669a523b07a15bd24c8da1bbb92206cb19e9366c3692af3d79253b703
   - name: libcdio
     buildsystem: autotools
@@ -43,15 +43,15 @@ modules:
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://github.com/rocky/libcdio-paranoia/archive/release-10.2+2.0.1.tar.gz
+        url: https://github.com/rocky/libcdio-paranoia/archive/release-10.2+2.0.2.tar.gz
         sha256: 7a4e257c85f3f84129cca55cd097c397364c7a6f79b9701bbc593b13bd59eb95
   - name: qcoro
     buildsystem: cmake-ninja
     sources:
       - type: git
         url: https://github.com/danvratil/qcoro
-        tag: v0.9.0
-        commit: "e66e8882acdea951cd379045167fc9be30564942"
+        tag: v0.10.0
+        commit: "fa5bc4296a252ad71c85209b60675bb025024a1e"
     config-opts:
       - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
   - name: libcontemporary
@@ -59,8 +59,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/vicr123/libcontemporary
-        tag: v6.0
-        commit: "d7d6a26b0f1d0620e7d73fd710046b948aa91a86"
+        tag: v6.1
+        commit: "774f9f97eb11183bfbe5355f5b5401d3b1e6a276"
   - name: contemporary
     buildsystem: cmake-ninja
     sources:
@@ -75,7 +75,7 @@ modules:
       - cp -r * /app/share/icons/contemporary/
     sources:
       - type: git
-        url: https://github.com/vicr123/contemporary-icons
+        url: https://github.com/theCheeseboard/contemporary-icons
         tag: v1.11
         commit: "6f5ffadb8616d9e80e6478129f7499c41974d209"
   - name: thefrisbee
@@ -83,9 +83,9 @@ modules:
     builddir: true
     sources:
       - type: git
-        url: https://github.com/vicr123/thefrisbee
-        tag: v2.0
-        commit: "2829c50b7d16604533e77f214be5464cdc51092d"
+        url: https://github.com/theCheeseboard/thefrisbee
+        tag: v3.0
+        commit: "d3b3907a06f665238c548a63a8644996d8718d46"
     config-opts:
       - -DFORCE_STABLE=ON
   - name: thebeat
@@ -93,8 +93,8 @@ modules:
     builddir: true
     sources:
       - type: git
-        url: https://github.com/vicr123/thebeat
-        tag: v4.0.1
-        commit: "23ffc3bf78282ca071a9a2f2975b432f145b2524"
+        url: https://github.com/theCheeseboard/thebeat
+        tag: v4.1
+        commit: "f0dac7cb31badde6a1ccdbe9aaf41fc9dac702e9"
     config-opts:
       - -DFORCE_STABLE=ON
