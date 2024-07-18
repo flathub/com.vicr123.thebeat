@@ -32,7 +32,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/taglib/taglib/releases/download/v2.0.1/taglib-2.0.1.tar.gz
-        sha256: 7fccd07669a523b07a15bd24c8da1bbb92206cb19e9366c3692af3d79253b703
+        sha256: 08c0a27b96aa5c4e23060fe0b6f93102ee9091a9385257b9d0ddcf467de0d925
   - name: libcdio
     buildsystem: autotools
     sources:
@@ -58,14 +58,14 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: git
-        url: https://github.com/vicr123/libcontemporary
+        url: https://github.com/theCheeseboard/libcontemporary
         tag: v6.1
         commit: "774f9f97eb11183bfbe5355f5b5401d3b1e6a276"
   - name: contemporary
     buildsystem: cmake-ninja
     sources:
       - type: git
-        url: https://github.com/vicr123/contemporary-theme
+        url: https://github.com/theCheeseboard/contemporary-theme
         tag: v2.0
         commit: "d4a9d63966d5800c47ad3a985bc8480ee29ed36e"
   - name: contemporary-icons
