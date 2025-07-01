@@ -27,16 +27,19 @@ cleanup:
 modules:
   - name: libcdio
     buildsystem: autotools
+    config-opts:
+      - --without-cd-drive
+      - --without-cd-info
+      - --without-cdda-player
+      - --without-cd-read
+      - --without-iso-info
+      - --without-iso-read
+      - --with-pic
+      - --disable-static
     sources:
       - type: archive
-        url: http://ftp.gnu.org/gnu/libcdio/libcdio-2.1.0.tar.bz2
-        sha256: 8550e9589dbd594bfac93b81ecf129b1dc9d0d51e90f9696f1b2f9b2af32712b
-  - name: libcdio-paranoia
-    buildsystem: autotools
-    sources:
-      - type: archive
-        url: https://github.com/rocky/libcdio-paranoia/archive/release-10.2+2.0.2.tar.gz
-        sha256: fe35208811f3edfcb79ae7b4ad1984f3188aea42c4c8ba4d009efafb36734a8b
+        url: https://github.com/libcdio/libcdio/archive/refs/tags/2.2.0.tar.gz
+        sha256: df007a9b9667797e027e573822cc865e5e106352f8a6fbca67ee8e9e7a1e5b51
   - name: qcoro
     buildsystem: cmake-ninja
     sources:
