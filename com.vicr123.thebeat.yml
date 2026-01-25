@@ -1,6 +1,6 @@
 app-id: com.vicr123.thebeat
 runtime: org.kde.Platform
-runtime-version: '6.9'
+runtime-version: '6.10'
 sdk: org.kde.Sdk
 command: thebeat
 finish-args:
@@ -38,31 +38,41 @@ modules:
       - --disable-static
     sources:
       - type: archive
-        url: https://github.com/libcdio/libcdio/archive/refs/tags/2.2.0.tar.gz
-        sha256: df007a9b9667797e027e573822cc865e5e106352f8a6fbca67ee8e9e7a1e5b51
+        url: https://github.com/libcdio/libcdio/releases/download/2.3.0/libcdio-2.3.0.tar.gz
+        sha256: 37bcb13296febbcff9dc4485834bac09212cb463c31fcea52f70ee1dd3a5a5de
+  - name: libcdio-paranoia
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://github.com/libcdio/libcdio-paranoia/releases/download/release-10.2%2B2.0.2/libcdio-paranoia-10.2+2.0.2.tar.gz
+        sha256: 99488b8b678f497cb2e2f4a1a9ab4a6329c7e2537a366d5e4fef47df52907ff6
   - name: qcoro
     buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
     sources:
       - type: git
         url: https://github.com/danvratil/qcoro
         tag: v0.12.0
-        commit: "ef1231ae490465b4f592ca326eee6d56a3d802ae"
-    config-opts:
-      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+        commit: ef1231ae490465b4f592ca326eee6d56a3d802ae
   - name: libcontemporary
     buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: git
         url: https://github.com/theCheeseboard/libcontemporary
         tag: v6.1
-        commit: "774f9f97eb11183bfbe5355f5b5401d3b1e6a276"
+        commit: 774f9f97eb11183bfbe5355f5b5401d3b1e6a276
   - name: contemporary
     buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: git
         url: https://github.com/theCheeseboard/contemporary-theme
         tag: v2.0
-        commit: "d4a9d63966d5800c47ad3a985bc8480ee29ed36e"
+        commit: d4a9d63966d5800c47ad3a985bc8480ee29ed36e
   - name: contemporary-icons
     buildsystem: simple
     build-commands:
@@ -72,24 +82,25 @@ modules:
       - type: git
         url: https://github.com/theCheeseboard/contemporary-icons
         tag: v1.11
-        commit: "6f5ffadb8616d9e80e6478129f7499c41974d209"
+        commit: 6f5ffadb8616d9e80e6478129f7499c41974d209
   - name: thefrisbee
     buildsystem: cmake-ninja
     builddir: true
+    config-opts:
+      - -DFORCE_STABLE=ON
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: git
         url: https://github.com/theCheeseboard/thefrisbee
         tag: v3.0
-        commit: "d3b3907a06f665238c548a63a8644996d8718d46"
-    config-opts:
-      - -DFORCE_STABLE=ON
+        commit: d3b3907a06f665238c548a63a8644996d8718d46
   - name: thebeat
     buildsystem: cmake-ninja
     builddir: true
+    config-opts:
+      - -DFORCE_STABLE=ON
     sources:
       - type: git
         url: https://github.com/theCheeseboard/thebeat
         tag: v4.1
-        commit: "f0dac7cb31badde6a1ccdbe9aaf41fc9dac702e9"
-    config-opts:
-      - -DFORCE_STABLE=ON
+        commit: f0dac7cb31badde6a1ccdbe9aaf41fc9dac702e9
