@@ -1,6 +1,6 @@
 app-id: com.vicr123.thebeat
 runtime: org.kde.Platform
-runtime-version: '6.7'
+runtime-version: '6.9'
 sdk: org.kde.Sdk
 command: thebeat
 finish-args:
@@ -14,93 +14,93 @@ finish-args:
   - --filesystem=/run/media
   - --system-talk-name=org.freedesktop.UDisks2
 cleanup:
-  - '/include'
-  - '/qt'
-  - '/share/man'
-  - '/share/the-libs'
   - '/bin/cd*'
   - '/bin/iso*'
-  - '/bin/mmc-tool'
-  - '/bin/taglib-config'
-  - '/bin/tltrdesktop'
-  - '/lib/pkgconfig'
+  - /bin/mmc-tool
+  - /bin/taglib-config
+  - /bin/tltrdesktop
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /mkspecs
+  - /share/info
+  - /share/man
+  - '*.la'
+  - '*.a'
 modules:
-  - name: utfcpp
-    buildsystem: cmake-ninja
-    sources:
-      - type: archive
-        url: https://github.com/nemtrif/utfcpp/archive/refs/tags/v4.0.5.tar.gz
-        sha256: ffc668a310e77607d393f3c18b32715f223da1eac4c4d6e0579a11df8e6b59cf
-  - name: taglib
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-    sources:
-      - type: archive
-        url: https://github.com/taglib/taglib/releases/download/v2.0.1/taglib-2.0.1.tar.gz
-        sha256: 08c0a27b96aa5c4e23060fe0b6f93102ee9091a9385257b9d0ddcf467de0d925
   - name: libcdio
     buildsystem: autotools
     sources:
       - type: archive
-        url: http://ftp.gnu.org/gnu/libcdio/libcdio-2.1.0.tar.bz2
-        sha256: 8550e9589dbd594bfac93b81ecf129b1dc9d0d51e90f9696f1b2f9b2af32712b
+        url: https://github.com/libcdio/libcdio/releases/download/2.3.0/libcdio-2.3.0.tar.gz
+        sha256: 37bcb13296febbcff9dc4485834bac09212cb463c31fcea52f70ee1dd3a5a5de
+
   - name: libcdio-paranoia
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://github.com/rocky/libcdio-paranoia/archive/release-10.2+2.0.2.tar.gz
+        url: https://github.com/libcdio/libcdio-paranoia/archive/release-10.2+2.0.2.tar.gz
         sha256: fe35208811f3edfcb79ae7b4ad1984f3188aea42c4c8ba4d009efafb36734a8b
+
   - name: qcoro
     buildsystem: cmake-ninja
-    sources:
-      - type: git
-        url: https://github.com/danvratil/qcoro
-        tag: v0.10.0
-        commit: "fa5bc4296a252ad71c85209b60675bb025024a1e"
     config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DBUILD_TESTING=OFF
       - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+    sources:
+      - type: archive
+        url: https://github.com/qcoro/qcoro/archive/v0.13.0.tar.gz
+        sha256: 4bff7513c5c8e301b66308df05795043b1792ed16381a484e5c990171b8ff19e
+
   - name: libcontemporary
     buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
     sources:
-      - type: git
-        url: https://github.com/theCheeseboard/libcontemporary
-        tag: v6.1
-        commit: "774f9f97eb11183bfbe5355f5b5401d3b1e6a276"
+      - type: archive
+        url: https://github.com/theCheeseboard/libcontemporary/archive/v6.1.tar.gz
+        sha256: a9b8ca64237f85c2e2cad0f46ecbe2cc4caf605ff5296bb562e629d9d852be82
+
   - name: contemporary
     buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
-      - type: git
-        url: https://github.com/theCheeseboard/contemporary-theme
-        tag: v2.0
-        commit: "d4a9d63966d5800c47ad3a985bc8480ee29ed36e"
+      - type: archive
+        url: https://github.com/theCheeseboard/contemporary-theme/archive/v2.0.tar.gz
+        sha256: 4be56bfe3279503cccc6bba782225e0924c884899e316ef52c1e1e057b0639ec
+
   - name: contemporary-icons
     buildsystem: simple
     build-commands:
       - mkdir -p /app/share/icons/contemporary
       - cp -r * /app/share/icons/contemporary/
     sources:
-      - type: git
-        url: https://github.com/theCheeseboard/contemporary-icons
-        tag: v1.11
-        commit: "6f5ffadb8616d9e80e6478129f7499c41974d209"
+      - type: archive
+        url: https://github.com/theCheeseboard/contemporary-icons/archive/v1.11.tar.gz
+        sha256: 217c7bf429954400ac1d20aa2bd2c2fe07263b1ce29d3dd55f49d75ced159140
+
   - name: thefrisbee
     buildsystem: cmake-ninja
     builddir: true
-    sources:
-      - type: git
-        url: https://github.com/theCheeseboard/thefrisbee
-        tag: v3.0
-        commit: "d3b3907a06f665238c548a63a8644996d8718d46"
     config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DFORCE_STABLE=ON
+    sources:
+      - type: archive
+        url: https://github.com/theCheeseboard/theFrisbee/archive/v3.0.tar.gz
+        sha256: 8ac9b804b513e61ba80b0cc48f8d0c39cd65f97c7da4faf0bb2a70695363a78d
+
   - name: thebeat
     buildsystem: cmake-ninja
     builddir: true
-    sources:
-      - type: git
-        url: https://github.com/theCheeseboard/thebeat
-        tag: v4.1
-        commit: "f0dac7cb31badde6a1ccdbe9aaf41fc9dac702e9"
     config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
       - -DFORCE_STABLE=ON
+    sources:
+      - type: archive
+        url: https://github.com/theCheeseboard/theBeat/archive/v4.1.tar.gz
+        sha256: 319e0e71fb6cf185cace7f7167d20c1661cc8a29d4092d7741cbbd2016d5ae2c
